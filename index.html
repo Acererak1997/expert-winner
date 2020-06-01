@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoList</title>
+</head>
+<body>
+  <h1>ToDoList</h1>
+  <label><input type="checkbox" id="all">すべて</label>
+  <label><input type="checkbox" id="progress">作業中</label>
+  <label><input type="checkbox" id="done">完了</label>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>コメント</th>
+        <th>状態</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="table">
+    </tbody>
+  </table>
+
+  <h2>新規タスクの作成</h2>
+  <form>
+    <input type="text" id="text" placeholder="Add To Do">
+    <input type="button" id="add" value="追加" onclick="addRow()">
+    <!-- <button id="add" value="Add" onclick="addRow()"></button> -->
+  </form>
+
+  <script src="app.js"></script>
+  
+</body>
+</html>
