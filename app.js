@@ -1,8 +1,8 @@
 'use strict'
+const todos = [];
 
 //追加時の処理
 document.getElementById('add').addEventListener('click', ()=> {
-  const todos = [];
   const table = document.getElementById("tbdoy");
   const todoText = document.getElementById('text').value;
 
@@ -10,15 +10,15 @@ document.getElementById('add').addEventListener('click', ()=> {
     task:  todoText,
     status: '作業中'
   }
-  todos.push(todo);
-  console.log(todos)
 
-  function displaytodo(){
+  todos.push(todo);
+
+  function displayTodos(){
     for(let i = 0 ; i < todos.length ; i++){
-      console.log(`todo${i}`);
+      console.log(todos[i]);
     }
   }
-  displaytodo();
+  displayTodos();
 
 // 最後へ行を追加
   const addRow = table.insertRow(-1);
@@ -51,3 +51,4 @@ document.getElementById('add').addEventListener('click', ()=> {
   deletebutton.classList.add("delete");
   celldelete.appendChild(deletebutton);
 });
+
