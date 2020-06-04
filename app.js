@@ -5,16 +5,13 @@
   
   //追加時の処理
   document.getElementById('add').addEventListener('click', (event)=> {
-    event.preventDefault();
-    let todoText = document.getElementById('text').value;
+    const todoText = document.getElementById('text').value;
     const todo = {
       task:  todoText,
       status: '作業中'
     }
-    if(todo){
-      todos.push(todo);
-      displayTodos()
-    }
+    todos.push(todo);
+    displayTodos()
   });
   
   
@@ -26,10 +23,10 @@
     todos.forEach((todo, index) =>{
       // ID&行追加
       const addRow = table.insertRow(-1);
-      const IDcell = addRow.insertCell(-1);
-      const Id = document.createElement('span');
-      Id.textContent = index;
-      IDcell.appendChild(Id);
+      const idCell = addRow.insertCell(-1);
+      const id = document.createElement('span');
+      id.textContent = index;
+      idCell.appendChild(id);
   
       // タスク
       const taskCell = addRow.insertCell(-1);
@@ -50,9 +47,6 @@
       deletebutton.type = "button";  
       deletebutton.value = "削除"; 
       deletebutton.classList.add("delete");
-      deletebutton.addEventListener('click', ()=>{
-        deleteRow(index);
-      });
       celldelete.appendChild(deletebutton);
     });
   }
