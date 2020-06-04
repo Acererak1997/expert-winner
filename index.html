@@ -7,9 +7,13 @@
 </head>
 <body>
   <h1>ToDoList</h1>
-  <label><input type="checkbox" id="all">すべて</label>
-  <label><input type="checkbox" id="progress">作業中</label>
-  <label><input type="checkbox" id="done">完了</label>
+  <form>
+    <p>
+      <input type="radio" name="hyouka" id="all" checked="checked">すべて
+      <input type="radio" name="hyouka" id="progress">作業中
+      <input type="radio" name="hyouka" id="done">完了
+    </p>
+  </form>
 
   <table id="table">
     <thead>
@@ -27,7 +31,7 @@
   <h2>新規タスクの作成</h2>
   <form>
     <input type="text" id="text" placeholder="Add To Do">
-    <input type="button" id="add" value="追加">
+    <input type="submit" id="add" value="追加">
   </form>
 
   <script src="app.js"></script>
