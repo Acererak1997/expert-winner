@@ -4,7 +4,7 @@
   const table = document.getElementById("tbdoy");
   
   //追加時の処理
-  document.getElementById('add').addEventListener('click', (event)=> {
+  document.getElementById('add').addEventListener('click', ()=> {
     const todoText = document.getElementById('text').value;
     const todo = {
       task:  todoText,
@@ -47,7 +47,14 @@
       deletebutton.type = "button";  
       deletebutton.value = "削除"; 
       deletebutton.classList.add("delete");
+      deletebutton.addEventListener('click', ()=>{
+        deleteRow(index);
+      });
       celldelete.appendChild(deletebutton);
     });
+  }
+  function deleteRow(index) {
+    todos.splice(index, 1);
+    displayTodos();
   }
 }
