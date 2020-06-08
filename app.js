@@ -36,25 +36,35 @@
   
       // 状態
       const statusCell = addRow.insertCell(-1);
-      const statusbutton = document.createElement("input"); 
-      statusbutton.type = "button";  
-      statusbutton.value = todo.status;
-      statusCell.appendChild(statusbutton);
+      const statusBtn = createStatus(todo.status);
+      statusCell.appendChild(statusBtn);
   
       // 削除ボタン
       const celldelete = addRow.insertCell(-1);
-      const deletebutton = document.createElement("input");  
-      deletebutton.type = "button";  
-      deletebutton.value = "削除"; 
-      deletebutton.classList.add("delete");
-      deletebutton.addEventListener('click', ()=>{
-        deleteRow(index);
-      });
-      celldelete.appendChild(deletebutton);
+      const removebutton = createDelete(index);
+      celldelete.appendChild(removebutton);
     });
   }
   function deleteRow(index) {
     todos.splice(index, 1);
     displayTodos();
   }
+
+  function createDelete(index) {
+    const deletebutton = document.createElement("input");  
+    deletebutton.type = "button";  
+    deletebutton.value = "削除"; 
+    deletebutton.addEventListener('click', ()=>{
+      deleteRow(index);
+    });
+    deletebutton.classList.add("delete");
+    return deletebutton;
+  }
+
+  function createStatus(status) {
+    const statusbutton = document.createElement("input"); 
+    statusbutton.type = "button";  
+    statusbutton.value = status;
+    return statusbutton
+  };
 }
