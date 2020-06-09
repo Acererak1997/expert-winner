@@ -1,50 +1,70 @@
-'use strict'
+{
+  'use strict'
+  const todos = [];
+  const table = document.getElementById("tbdoy");
+  
+  //追加時の処理
+  document.getElementById('add').addEventListener('click', ()=> {
+    const todoText = document.getElementById('text').value;
+    const todo = {
+      task:  todoText,
+      status: '作業中'
+    }
+    todos.push(todo);
+    displayTodos()
+  });
+  
+  
+  function displayTodos(){
+    // 全行削除
+    while(table.firstChild){
+      table.removeChild(table.firstChild);
+    }
+    todos.forEach((todo, index) =>{
+      // ID&行追加
+      const addRow = table.insertRow(-1);
+      const idCell = addRow.insertCell(-1);
+      const id = document.createElement('span');
+      id.textContent = index;
+      idCell.appendChild(id);
+  
+      // タスク
+      const taskCell = addRow.insertCell(-1);
+      const task = document.createElement('span');
+      task.textContent = todo.task;
+      taskCell.appendChild(task);
+  
+      // 状態
+      const statusCell = addRow.insertCell(-1);
+      const statusBtn = createStatus(todo.status);
+      statusCell.appendChild(statusBtn);
+  
+      // 削除ボタン
+      const celldelete = addRow.insertCell(-1);
+      const removebutton = createDelete(index);
+      celldelete.appendChild(removebutton);
+    });
+  }
+  function deleteRow(index) {
+    todos.splice(index, 1);
+    displayTodos();
+  }
 
-// 追加
-function addRow() {
-  const table = document.getElementById("table");
-  const row = table.insertRow(-1);
-  
-  let cell1 = row.insertCell(-1);
-  let cell2 = row.insertCell(-1);
-  let cell3 = row.insertCell(-1);
-  let cell4 = row.insertCell(-1);
-  let tIndex = table.rows.length-1;
-  
-  let text = document.getElementById("text").value;
-  cell1.innerHTML = '<span class="index">' + tIndex +'</span>' ; 
-  cell2.innerHTML = text; 
-  cell3.innerHTML = '<button  class="prog" value="作業" onclick="change()">作業中</button>'
-  cell4.innerHTML = '<button id="delete" onclick="deleteRow(this)">削除</button>'; 
-  document.getElementById("text").value = "";
+  function createDelete(index) {
+    const deletebutton = document.createElement("input");  
+    deletebutton.type = "button";  
+    deletebutton.value = "削除"; 
+    deletebutton.addEventListener('click', ()=>{
+      deleteRow(index);
+    });
+    deletebutton.classList.add("delete");
+    return deletebutton;
+  }
+
+  function createStatus(status) {
+    const statusbutton = document.createElement("input"); 
+    statusbutton.type = "button";  
+    statusbutton.value = status;
+    return statusbutton
+  };
 }
-
-// リスト削除&番号の更新
-// function deleteRow(todo){
-//   let todoTr = todo.parentNode.parentNode;
-//   let tab = todoTr.parentNode;
-//   if(tab)
-//   tab.deleteRow(todoTr.sectionRowIndex);
-
-//   let indexNumber = document.getElementsByTagName("span");
-//   if (!indexNumber)
-//   return false;
-  
-//   let num = 1;
-//   for (let i = 0; i < indexNumber.length; i++){
-//     if (indexNumber[i].className.match("index"))
-//     indexNumber[i].innerHTML = num++;
-//   }
-// }
-
-
-// // タスク状態の変更
-// function change(e){
-//   let todo = event.target.innerHTML;
-//   console.log(todo);
-//   if(todo === "作業中"){
-//     todo.document.write = "完了";
-//   }
-// }
-
-// タブへの表示

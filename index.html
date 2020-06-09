@@ -7,28 +7,31 @@
 </head>
 <body>
   <h1>ToDoList</h1>
-  <label><input type="checkbox" id="all">すべて</label>
-  <label><input type="checkbox" id="progress">作業中</label>
-  <label><input type="checkbox" id="done">完了</label>
+  <form>
+    <p>
+      <input type="radio" name="hyouka" id="all" checked="checked">すべて
+      <input type="radio" name="hyouka" id="progress">作業中
+      <input type="radio" name="hyouka" id="done">完了
+    </p>
+  </form>
 
-  <table>
+  <table id="table">
     <thead>
       <tr>
         <th>ID</th>
         <th>コメント</th>
         <th>状態</th>
-        <th></th>
       </tr>
     </thead>
-    <tbody id="table">
+    <tbody id="tbdoy">
+
     </tbody>
   </table>
 
   <h2>新規タスクの作成</h2>
   <form>
     <input type="text" id="text" placeholder="Add To Do">
-    <input type="button" id="add" value="追加" onclick="addRow()">
-    <!-- <button id="add" value="Add" onclick="addRow()"></button> -->
+    <input type="button" id="add" value="追加">
   </form>
 
   <script src="app.js"></script>
