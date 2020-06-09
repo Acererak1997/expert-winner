@@ -14,7 +14,6 @@
     displayTodos()
   });
   
-  
   function displayTodos(){
     // 全行削除
     while(table.firstChild){
@@ -65,6 +64,16 @@
     const statusbutton = document.createElement("input"); 
     statusbutton.type = "button";  
     statusbutton.value = status;
+    // ステータス変更
+    statusbutton.addEventListener('click', ()=>{
+      if(status === '作業中'){
+        status = '完了';
+        statusbutton.value = status; 
+      } else {
+        status = '作業中';
+        statusbutton.value = status; 
+      }
+    });
     return statusbutton
   };
 }
