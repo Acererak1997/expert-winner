@@ -8,13 +8,13 @@
     const todoText = document.getElementById('text').value;
     const todo = {
       task:  todoText,
-      status: '作業中'
+      status: "作業中"
     }
     todos.push(todo);
-    displayTodos()
+    displayTodos(todos);
   });
   
-  function displayTodos(){
+  function displayTodos(todos){
     // 全行削除
     while(table.firstChild){
       table.removeChild(table.firstChild);
@@ -35,7 +35,7 @@
   
       // 状態
       const statusCell = addRow.insertCell(-1);
-      const statusBtn = createStatus(todo.status);
+      const statusBtn = createStatus(todo);
       statusCell.appendChild(statusBtn);
   
       // 削除ボタン
@@ -60,20 +60,55 @@
     return deletebutton;
   }
 
-  function createStatus(status) {
+  function createStatus(todo) {
     const statusbutton = document.createElement("input"); 
     statusbutton.type = "button";  
-    statusbutton.value = status;
+    statusbutton.value = todo.status;
     // ステータス変更
-    statusbutton.addEventListener('click', ()=>{
-      if(status === '作業中'){
-        status = '完了';
-        statusbutton.value = status; 
+    statusbutton.addEventListener('click', () =>{
+      const index = todos.indexOf(todo);
+      console.log(index);
+      if(statusbutton.textContent === '作業中'){
+        todos[index].status = '完了';
+        console.log(todo.status)
+        // statusbutton.value = todos[index].status; 
       } else {
-        status = '作業中';
-        statusbutton.value = status; 
+        todos[index].status = '作業中';
+        console.log(todo.status)
+        // statusbutton.value = todos[index].status; 
       }
     });
     return statusbutton
   };
+
+  //  // ラジオボタンの処理
+  //  //  ボタンすべて
+  //  document.getElementById('all').addEventListener('change', ()=>{
+  //   const filterItems = todos.filter(todo => {
+  //     if(todo === '作業中' || '完了')
+  //     return todos.splice();
+  //   })
+  //   console.log(filterItems);
+  //   displayTodos(filterItems);
+  //   });
+  // // ボタン作業中
+  // document.getElementById('prog').addEventListener('change', ()=>{
+  //   const filterProg = todos.filter(todo => {
+  //     return todo.status == '作業中';
+  //   })
+  //   console.log(filterProg);
+  //   displayTodos(filterProg);
+  // });
+  // //ボタン完了
+  // document.getElementById('comp').addEventListener('change', ()=>{
+  //   const filterComp = todos.filter(todo => {
+  //     if(todo.status === '完了'){
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   })
+  //   console.log(filterComp);
+  //   displayTodos(filterComp);
+  // });
 }
