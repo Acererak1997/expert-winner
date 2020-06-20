@@ -2,6 +2,9 @@
   'use strict'
   const todos = [];
   const table = document.getElementById("tbdoy");
+  const all = document.getElementById('all');
+  const prog = document.getElementById('prog');
+  const comp = document.getElementById('comp');
   
   //追加時の処理
   document.getElementById('add').addEventListener('click', ()=> {
@@ -11,7 +14,22 @@
       status: "作業中"
     }
     todos.push(todo);
-    displayTodos(todos);
+    if(all.checked){
+      displayTodos(todos);
+    }
+    if(prog.checked){
+      const progress = todos.filter(todo =>{
+        return todo.status === '作業中'
+      })
+      displayTodos(progress);
+    }
+    if(comp.checked){
+      const complete = todos.filter(todo =>{
+        return todo.status === '完了'
+      })
+      displayTodos(complete)
+    }
+    // displayTodos(todos);
   });
   
   function displayTodos(todos){
@@ -19,6 +37,7 @@
     while(table.firstChild){
       table.removeChild(table.firstChild);
     }
+
     todos.forEach((todo, index) =>{
       // ID&行追加
       const addRow = table.insertRow(-1);
@@ -46,7 +65,7 @@
   }
   function deleteRow(index) {
     todos.splice(index, 1);
-    displayTodos();
+    displayTodos(todos);
   }
 
   function createDelete(index) {
@@ -66,49 +85,39 @@
     statusbutton.value = todo.status;
     // ステータス変更
     statusbutton.addEventListener('click', () =>{
-      const index = todos.indexOf(todo);
-      console.log(index);
-      if(statusbutton.textContent === '作業中'){
-        todos[index].status = '完了';
-        console.log(todo.status)
-        // statusbutton.value = todos[index].status; 
+      if(todo.status === '作業中'){
+        todo.status = '完了';
+        statusbutton.value = todo.status;
       } else {
-        todos[index].status = '作業中';
-        console.log(todo.status)
-        // statusbutton.value = todos[index].status; 
+        todo.status = '作業中';
+        statusbutton.value = todo.status;
       }
     });
     return statusbutton
   };
 
-  //  // ラジオボタンの処理
-  //  //  ボタンすべて
-  //  document.getElementById('all').addEventListener('change', ()=>{
-  //   const filterItems = todos.filter(todo => {
-  //     if(todo === '作業中' || '完了')
-  //     return todos.splice();
-  //   })
-  //   console.log(filterItems);
-  //   displayTodos(filterItems);
-  //   });
-  // // ボタン作業中
-  // document.getElementById('prog').addEventListener('change', ()=>{
-  //   const filterProg = todos.filter(todo => {
-  //     return todo.status == '作業中';
-  //   })
-  //   console.log(filterProg);
-  //   displayTodos(filterProg);
-  // });
-  // //ボタン完了
-  // document.getElementById('comp').addEventListener('change', ()=>{
-  //   const filterComp = todos.filter(todo => {
-  //     if(todo.status === '完了'){
-  //       return true
-  //     } else {
-  //       return false
-  //     }
-  //   })
-  //   console.log(filterComp);
-  //   displayTodos(filterComp);
-  // });
+   // ラジオボタンの処理
+   //  ボタンすべて
+   all.addEventListener('change', ()=>{
+     displayTodos(todos);
+    });
+
+  // ボタン作業中
+  prog.addEventListener('change', ()=>{
+    const filterProg = todos.filter(todo => {
+      return todo.status == '作業中';
+    })
+    displayTodos(filterProg);
+  });
+  //ボタン完了
+  comp.addEventListener('change', ()=>{
+    const filterComp = todos.filter(todo => {
+      if(todo.status === '完了'){
+        return true
+      } else {
+        return false
+      }
+    })
+    displayTodos(filterComp);
+  });
 }
